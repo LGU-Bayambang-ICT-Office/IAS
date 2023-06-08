@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('audit__plans', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('ap_id');
             $table->string('audit_type', 50);
             $table->text('audit_objective');
             $table->text('audit_criteria');
@@ -24,6 +23,7 @@ return new class extends Migration
             $table->date('audit_date_to');
             $table->string('audit_qmr');
             $table->foreignID('user_id')->constrained();
+            $table->timestamps();
         });
     }
 

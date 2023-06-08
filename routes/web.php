@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuditPlanController;
+use App\Http\Controllers\AuditClauseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,9 @@ use App\Http\Controllers\AuditPlanController;
 
 Route::get('/create', [AuditPlanController::class, 'index'])->name('create-plan');
 Route::post('/create', [AuditPlanController::class, 'store']);
+
+Route::get('/clause/create', [AuditClauseController::class, 'index'])->name('create-clause');
+Route::post('/clause/create', [AuditClauseController::class, 'store']);
 
 Route::get('/', function () {
     return view('index');
