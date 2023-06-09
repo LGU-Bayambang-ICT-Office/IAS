@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use auth;
 use App\Models\User;
 use App\Models\Audit_Plan;
+use App\Models\Audit_Clause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Brian2694\Toastr\Facades\Toastr;
@@ -36,6 +37,8 @@ class AuditPlanController extends Controller
     public function store(Request $request)
     {
         //
+
+        // dd($request);
 
         $plan = $this->validate($request, [
 
@@ -75,8 +78,26 @@ class AuditPlanController extends Controller
      */
     public function show(Audit_Plan $audit_Plan)
     {
-        //
+        //list of plan
+
+        $audit_Plan = Audit_Plan::all();
+
+        return view('plans.list', compact('audit_Plan') );
     }
+
+    /**
+     * Display the specified resource.
+     */
+
+    public function selected_plan($id)
+    {
+        //assigning of auditors on the selected plan
+
+        $record = DB::table('audit__plans')->where('id', $id)->get();
+        $clauses = Audit_Clause::all();
+
+        return view('plans.assign', ['record' => $record, 'clauses' => $clauses]);
+       }
 
     /**
      * Show the form for editing the specified resource.

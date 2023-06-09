@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('offices', function (Blueprint $table) {
+        Schema::create('assignment_clauses', function (Blueprint $table) {
             $table->id();
-            $table->string('office_desc');
-            $table->string('status');
+            $table->foreignID('apa_id')->constrained('audit_plan_assignments');
+            $table->foreignID('c_id')->constrained('audit_clauses');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('offices');
+        Schema::dropIfExists('assignment_clauses');
     }
 };

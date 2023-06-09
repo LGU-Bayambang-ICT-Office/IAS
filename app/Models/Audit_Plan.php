@@ -26,4 +26,6 @@ class Audit_Plan extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+
 }

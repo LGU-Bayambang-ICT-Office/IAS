@@ -3,7 +3,7 @@
 
 <section class="bg-white dark:bg-gray-900">
 <div class="px-4 py-8 ">
-
+    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">List of Audit Plan</h2>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -27,34 +27,25 @@
         </thead>
         <tbody>
 
-            @if(!empty($clauses))
-            @foreach ($clauses as $clause)
+            @if(!empty($audit_Plan))
+            @foreach ($audit_Plan as $plan)
             
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                   {{ $clause->clause_no }}
+                   {{ $plan->audit_type }}
                 </th>
                 <td class="px-6 py-4">
-                    {{ $clause->clause_sub_no }}
+                    {{!! $plan->audit_objective !!}}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $clause->clause_desc }}
+                    {{!! $plan->audit_criteria !!}}
                 </td>
                 <td class="px-6 py-4">
-
-                    @if( $clause->clause_status == 'on' )
-                    <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Enabled
-                    </div>
-                    @else
-                    <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Disabled
-                    </div>
-                    @endif
+                    {{ date('F d, Y', strtotime($plan->audit_date_from)) }} - {{ date('F d, Y', strtotime($plan->audit_date_to)) }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <a href="{{ route('selected_plan', $plan->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Assign Auditors</a>
                 </td>
             </tr>
             @endforeach
